@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.min.js"></script>
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
+    <script src="/assets/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <div id="app" class="container">
+    <div class="row">
+        <div class="col-md-4 offset-md-4 mt-4">
+            <h2>Todo List</h2>
+            <div class="form-group mb-2">
+                <form @submit.prevent="saveTodo" class="d-flex">
+                    <template>
+                        <input v-if="!onEdit" type="text" v-model='todo.todo' class="form-control" placeholder="Add new todo">
+                        <input v-else type="text" v-model='todo.todo' class="form-control" placeholder="Edit todo">
+                    </template>
+                    <button class="btn btn-sm btn-primary ms-1">Add</button>
+                </form>
+            </div>
+            <ul class="list-group">
+                <todo-item
+                  v-for="(todo, index) in todos"
+                  v-bind:todo="todo"
+                  :key="todo.id"
+                  v-on:remove="todos.splice(index, 1)"
+                ></todo-item>
+            </ul>
+        </div>
+    </div>
+  </div>
+</body>
+    <script src="app.js"></script>
+</html>
